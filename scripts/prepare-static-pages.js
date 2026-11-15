@@ -8,34 +8,24 @@ if (!fs.existsSync(publicDir)) {
   process.exit(1);
 }
 
-// 1. Create .nojekyll so GitHub Pages does not ignore underscore files
+// 1. Create .nojekyll so GitHub Pages serves files whose names start with _
 fs.writeFileSync(path.join(publicDir, ".nojekyll"), "", "utf-8");
+console.log("Created .nojekyll");
 
-// 2. Ensure 404.html exists from root index.html
-if (fs.existsSync(path.join(publicDir, "index.html"))) {
-  fs.copyFileSync(path.join(publicDir, "index.html"), path.join(publicDir, "404.html"));
+// 2. Copy root index.html → 404.html so the SPA can handle unknown paths
+//    (GitHub Pages serves 404.html for any URL that doesn't match a file)
+const indexHtml = path.join(publicDir, "index.html");
+const notFoundHtml = path.join(publicDir, "404.html");
+
+if (fs.existsSync(indexHtml)) {
+  fs.copyFileSync(indexHtml, notFoundHtml);
+  console.log("Copied index.html → 404.html");
+} else {
+  console.error("index.html not found in .output/public — build may have failed");
+  process.exit(1);
 }
 
-// 3. Recursively find all HTML files and patch root-relative paths for GitHub Pages subpath (/24hournews/)
-function patchHtmlFiles(dir) {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      patchHtmlFiles(fullPath);
-    } else if (entry.isFile() && entry.name.endsWith(".html")) {
-      let content = fs.readFileSync(fullPath, "utf-8");
-      // Replace "/assets/" with "/24hournews/assets/"
-      content = content.replace(/href="\/assets\//g, 'href="/24hournews/assets/');
-      content = content.replace(/src="\/assets\//g, 'src="/24hournews/assets/');
-      content = content.replace(/"\/assets\//g, '"/24hournews/assets/');
-      content = content.replace(/'\/assets\//g, "'/24hournews/assets/");
-      // Replace "/favicon.png" with "/24hournews/favicon.png"
-      content = content.replace(/href="\/favicon\.png"/g, 'href="/24hournews/favicon.png"');
-      fs.writeFileSync(fullPath, content, "utf-8");
-    }
-  }
-}
-
-patchHtmlFiles(publicDir);
-console.log("Successfully prepared all static pages for GitHub Pages (/24hournews/)");
+// NOTE: No HTML asset-path patching is needed here.
+// vite.base = '/24hournews/' in vite.config.ts makes Vite automatically prefix
+// ALL asset references (CSS, JS chunks, images) with /24hournews/ during the build.
+console.log("Successfully prepared static pages for GitHub Pages (/24hournews/)");
