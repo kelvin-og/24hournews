@@ -40,9 +40,8 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://mock.supabase.co' }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'mock_key' }}
 
-      - name: Enable SPA client-side routing fallback
-        run: |
-          cp .output/public/index.html .output/public/404.html
+      - name: Prepare GitHub Pages Static Bundle
+        run: node scripts/prepare-static-pages.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
