@@ -35,3 +35,4 @@ fs.writeFileSync(path.join(publicDir, "404.html"), html, "utf-8");
 fs.writeFileSync(path.join(publicDir, ".nojekyll"), "", "utf-8");
 
 console.log("Successfully prepared GitHub Pages static bundle (.nojekyll, index.html, 404.html)");
+
