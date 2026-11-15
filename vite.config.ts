@@ -11,9 +11,12 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   vite: {
-    // Set the base path so Vite prefixes ALL asset URLs (CSS, JS chunks, images)
-    // with /24hournews/ — required for GitHub Pages subpath deployment.
-    base: "/24hournews/",
+    // In production build for GitHub Pages, prefix all assets with /24hournews/.
+    // In development mode, serve assets from root /.
+    base:
+      process.env["NODE_ENV"] === "development"
+        ? "/"
+        : process.env["VITE_BASE_PATH"] || "/24hournews/",
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).

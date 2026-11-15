@@ -6,10 +6,11 @@ export const getRouter = () => {
   // One client per request: a module-level QueryClient leaks cached data between SSR requests.
   const queryClient = new QueryClient();
 
-  // When deployed to GitHub Pages the app lives under /24hournews/.
-  // VITE_BASE_PATH is injected by the deploy workflow; it is undefined in
-  // local dev and on any other host, so the router falls back to "/".
-  const basepath = import.meta.env["VITE_BASE_PATH"] ?? "/";
+  // In production (GitHub Pages), the site is served under /24hournews/.
+  // In development, it is served from the root /.
+  const basepath =
+    import.meta.env["VITE_BASE_PATH"] ??
+    (import.meta.env.DEV ? "/" : "/24hournews");
 
   const router = createRouter({
     routeTree,

@@ -1,6 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
 
+// Polyfill global WebSocket in SSR/Node.js environments where native WebSocket is missing (e.g. Node 20)
+// so that @supabase/realtime-js does not throw an uncaught exception during prerender/build.
+if (typeof globalThis !== "undefined" && typeof globalThis.WebSocket === "undefined") {
+  (globalThis as unknown as { WebSocket: unknown }).WebSocket = class DummyWebSocket {};
+}
+
 const supabaseUrl = import.meta.env["VITE_SUPABASE_URL"] as string | undefined;
 const supabaseKey = import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] as string | undefined;
 
