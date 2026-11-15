@@ -2,37 +2,40 @@ import fs from "node:fs";
 import path from "node:path";
 
 const publicDir = path.resolve(".output/public");
-const assetsDir = path.join(publicDir, "assets");
 
-if (!fs.existsSync(assetsDir)) {
-  console.error("Assets directory not found:", assetsDir);
+if (!fs.existsSync(publicDir)) {
+  console.error("Public directory not found:", publicDir);
   process.exit(1);
 }
 
-const files = fs.readdirSync(assetsDir);
-const clientJs = files.find((f) => f.startsWith("client-") && f.endsWith(".js"));
-const stylesCss = files.find((f) => f.startsWith("styles-") && f.endsWith(".css"));
-
-console.log("Found client entry:", clientJs, "styles:", stylesCss);
-
-const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>24HOURNEWS — Ghana 24-Hour Digital Newsroom</title>
-  <link rel="icon" type="image/png" href="./favicon.png" />
-  ${stylesCss ? `<link rel="stylesheet" href="./assets/${stylesCss}" />` : ""}
-</head>
-<body class="bg-background text-foreground antialiased min-h-screen">
-  <div id="root"></div>
-  ${clientJs ? `<script type="module" src="./assets/${clientJs}"></script>` : ""}
-</body>
-</html>`;
-
-fs.writeFileSync(path.join(publicDir, "index.html"), html, "utf-8");
-fs.writeFileSync(path.join(publicDir, "404.html"), html, "utf-8");
+// 1. Create .nojekyll so GitHub Pages does not ignore underscore files
 fs.writeFileSync(path.join(publicDir, ".nojekyll"), "", "utf-8");
 
-console.log("Successfully prepared GitHub Pages static bundle (.nojekyll, index.html, 404.html)");
+// 2. Ensure 404.html exists from root index.html
+if (fs.existsSync(path.join(publicDir, "index.html"))) {
+  fs.copyFileSync(path.join(publicDir, "index.html"), path.join(publicDir, "404.html"));
+}
 
+// 3. Recursively find all HTML files and patch root-relative paths for GitHub Pages subpath (/24hournews/)
+function patchHtmlFiles(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      patchHtmlFiles(fullPath);
+    } else if (entry.isFile() && entry.name.endsWith(".html")) {
+      let content = fs.readFileSync(fullPath, "utf-8");
+      // Replace "/assets/" with "/24hournews/assets/"
+      content = content.replace(/href="\/assets\//g, 'href="/24hournews/assets/');
+      content = content.replace(/src="\/assets\//g, 'src="/24hournews/assets/');
+      content = content.replace(/"\/assets\//g, '"/24hournews/assets/');
+      content = content.replace(/'\/assets\//g, "'/24hournews/assets/");
+      // Replace "/favicon.png" with "/24hournews/favicon.png"
+      content = content.replace(/href="\/favicon\.png"/g, 'href="/24hournews/favicon.png"');
+      fs.writeFileSync(fullPath, content, "utf-8");
+    }
+  }
+}
+
+patchHtmlFiles(publicDir);
+console.log("Successfully prepared all static pages for GitHub Pages (/24hournews/)");

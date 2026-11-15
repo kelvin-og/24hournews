@@ -37,8 +37,8 @@ jobs:
       - name: Build static client output
         run: npm run build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://mock.supabase.co' }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'mock_key' }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://hvlvkoxjzpxgicypsycv.supabase.co' }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_WQFiRPrfadvgiHGu355-7g_AFn0g2Xb' }}
 
       - name: Prepare GitHub Pages Static Bundle
         run: node scripts/prepare-static-pages.js
