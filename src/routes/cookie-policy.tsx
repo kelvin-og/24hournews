@@ -6,7 +6,7 @@ export const Route = createFileRoute("/cookie-policy")({
   head: () =>
     pageMeta(
       "Cookie Policy",
-      "How 24HOURNEWS uses cookies and similar technologies.",
+      "How 24hournews uses cookies and similar technologies.",
       "/cookie-policy",
     ),
   component: () => (

@@ -11,8 +11,11 @@
 import sharp from "sharp";
 import { writeFileSync } from "fs";
 
-const INPUT = "src/assets/24hournews-logo.png";
+const INPUT =
+  process.argv[2] ||
+  "C:/Users/Feehi/.gemini/antigravity/brain/b75cf334-b702-4057-b58d-15173ac74840/.user_uploaded/media_1794869310342_0358b4e8.jpg";
 const OUTPUT = "src/assets/24hournews-logo.png";
+const FAVICON_OUTPUT = "public/favicon.png";
 
 console.log("Reading logo...");
 const { data: rawBuf, info } = await sharp(INPUT)
@@ -127,3 +130,13 @@ const outBuf = await sharp(Buffer.from(data), {
 
 writeFileSync(OUTPUT, outBuf);
 console.log(`✅  Saved → ${OUTPUT}  (${(outBuf.length / 1024).toFixed(0)} KB)`);
+
+// ── Generate Favicon ──────────────────────────────────────────────────────────
+const faviconBuf = await sharp(outBuf)
+  .trim()
+  .resize(64, 64, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png()
+  .toBuffer();
+
+writeFileSync(FAVICON_OUTPUT, faviconBuf);
+console.log(`✅  Saved Favicon → ${FAVICON_OUTPUT}`);

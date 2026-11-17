@@ -1,11 +1,11 @@
 // Central site configuration. Swap branding, links and categories here.
 export const SITE = {
-  name: "24HOURNEWS",
+  name: "24hournews",
   domain: "24hournews.com.gh",
   url: "https://24hournews.com.gh",
-  tagline: "Independent news from Ghana and beyond, around the clock.",
+  tagline: "Truth. Timely. Trusted.",
   description:
-    "24HOURNEWS is a digital news publication covering Ghana and the world: general news, education, entertainment, business, sports, politics and health.",
+    "24hournews is a digital news publication covering Ghana and the world: general news, education, entertainment, business, sports, politics and health.",
   // PLACEHOLDER social links — replace with official profile URLs when available.
   social: {
     facebook: "#facebook-placeholder",

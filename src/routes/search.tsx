@@ -9,9 +9,9 @@ export const Route = createFileRoute("/search")({
   loaderDeps: ({ search }) => ({ q: search.q }),
   loader: ({ deps }) => searchArticles(deps.q),
   head: () => ({
-    ...pageMeta("Search", "Search 24HOURNEWS stories by headline, topic or section.", "/search"),
+    ...pageMeta("Search", "Search 24hournews stories by headline, topic or section.", "/search"),
     meta: [
-      ...pageMeta("Search", "Search 24HOURNEWS stories by headline, topic or section.", "/search")
+      ...pageMeta("Search", "Search 24hournews stories by headline, topic or section.", "/search")
         .meta,
       { name: "robots", content: "noindex" },
     ],

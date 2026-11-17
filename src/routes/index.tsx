@@ -138,7 +138,7 @@ function Home() {
     <>
       <DemoNotice />
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-6">
-        <h1 className="sr-only">24HOURNEWS — latest news from Ghana</h1>
+        <h1 className="sr-only">24hournews — latest news from Ghana</h1>
         <FeaturedCarousel articles={featured} label="Top stories" />
 
         <div className="grid gap-12 lg:grid-cols-[1fr_20rem]">

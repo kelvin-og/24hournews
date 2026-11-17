@@ -29,7 +29,7 @@ const seeds: Seed[] = [
   [
     "education",
     "Sample story: Regional schools pilot a new digital learning programme",
-    "A demonstration article showing how an education feature would look on 24HOURNEWS.",
+    "A demonstration article showing how an education feature would look on 24hournews.",
     "Ama Mensah (Demo)",
   ],
   [
@@ -83,7 +83,7 @@ const seeds: Seed[] = [
   [
     "sports",
     "Sample story: Club football season opens with a packed stadium",
-    "Demonstration sports article for the 24HOURNEWS layout.",
+    "Demonstration sports article for the 24hournews layout.",
     "Kojo Amoah (Demo)",
   ],
   [
@@ -119,7 +119,7 @@ const seeds: Seed[] = [
   [
     "health",
     "Sample story: Community clinics run free blood pressure checks",
-    "Demonstration health article for the 24HOURNEWS layout.",
+    "Demonstration health article for the 24hournews layout.",
     "Dr. Yaa Badu (Demo)",
   ],
   [
@@ -147,7 +147,7 @@ function body(category: string): ContentBlock[] {
   return [
     {
       type: "paragraph",
-      text: `This is demonstration content created to preview the ${category} article layout on 24HOURNEWS. It does not describe real events, people or organisations, and will be replaced with genuine reporting once the publishing system is connected.`,
+      text: `This is demonstration content created to preview the ${category} article layout on 24hournews. It does not describe real events, people or organisations, and will be replaced with genuine reporting once the publishing system is connected.`,
     },
     {
       type: "paragraph",

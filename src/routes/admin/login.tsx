@@ -152,7 +152,7 @@ function LoginPage() {
         {/* Back Link */}
         <div className="text-center">
           <Link to="/" className="text-xs font-medium text-muted-foreground hover:text-foreground">
-            ← Back to public 24HOURNEWS website
+            ← Back to public 24hournews website
           </Link>
         </div>
       </div>

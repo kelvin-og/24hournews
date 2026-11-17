@@ -6,7 +6,7 @@ export const Route = createFileRoute("/privacy-policy")({
   head: () =>
     pageMeta(
       "Privacy Policy",
-      "How 24HOURNEWS collects, uses and protects your information.",
+      "How 24hournews collects, uses and protects your information.",
       "/privacy-policy",
     ),
   component: () => (
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/privacy-policy")({
         Placeholder — the official privacy policy will be published here.
       </p>
       <p>
-        This page will explain what personal information 24HOURNEWS collects, how it is used, and
+        This page will explain what personal information 24hournews collects, how it is used, and
         the choices readers have.
       </p>
     </StaticPage>

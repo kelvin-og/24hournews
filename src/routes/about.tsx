@@ -6,13 +6,13 @@ export const Route = createFileRoute("/about")({
   head: () =>
     pageMeta(
       "About Us",
-      "About 24HOURNEWS, a digital news publication for Ghana and the world.",
+      "About 24hournews, a digital news publication for Ghana and the world.",
       "/about",
     ),
   component: () => (
     <StaticPage title="About Us">
       <p>
-        24HOURNEWS is a digital news publication bringing readers in Ghana and around the world
+        24hournews is a digital news publication bringing readers in Ghana and around the world
         clear, trustworthy reporting across general news, education, entertainment, business,
         sports, politics and health.
       </p>

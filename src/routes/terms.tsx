@@ -6,7 +6,7 @@ export const Route = createFileRoute("/terms")({
   head: () =>
     pageMeta(
       "Terms and Conditions",
-      "Terms and conditions for using the 24HOURNEWS website.",
+      "Terms and conditions for using the 24hournews website.",
       "/terms",
     ),
   component: () => (

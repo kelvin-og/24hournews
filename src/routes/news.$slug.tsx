@@ -16,7 +16,7 @@ export const Route = createFileRoute("/news/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData)
       return {
-        meta: [{ title: "Article not found | 24HOURNEWS" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: `Article not found | ${SITE.name}` }, { name: "robots", content: "noindex" }],
       };
     const a = loaderData.article;
     const url = `${SITE.url}/news/${a.slug}`;

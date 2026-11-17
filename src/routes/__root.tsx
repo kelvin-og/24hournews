@@ -89,7 +89,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "24HOURNEWS — News from Ghana, around the clock" },
+      { title: `${SITE.name} — ${SITE.tagline}` },
       { name: "description", content: SITE.description },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },

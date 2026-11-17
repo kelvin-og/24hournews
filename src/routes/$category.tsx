@@ -18,12 +18,12 @@ export const Route = createFileRoute("/$category")({
     loaderData
       ? pageMeta(
           `${loaderData.category.name} News`,
-          `${loaderData.category.description} Latest ${loaderData.category.name.toLowerCase()} stories on 24HOURNEWS.`,
+          `${loaderData.category.description} Latest ${loaderData.category.name.toLowerCase()} stories on 24hournews.`,
           `/${params.category}`,
         )
       : {
           meta: [
-            { title: "Section not found | 24HOURNEWS" },
+            { title: "Section not found | 24hournews" },
             { name: "robots", content: "noindex" },
           ],
         },

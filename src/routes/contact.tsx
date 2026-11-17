@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
   head: () =>
     pageMeta(
       "Contact Us",
-      "Get in touch with the 24HOURNEWS newsroom with tips, feedback or enquiries.",
+      "Get in touch with the 24hournews newsroom with tips, feedback or enquiries.",
       "/contact",
     ),
   component: Contact,
